@@ -78,7 +78,7 @@
 \newcommand*\thecompany{College of Software, Nankai University}
 \newcommand\thesubtitle{}
 \renewcommand\author[1]{\renewcommand\theauthor{#1}}
-\newcommand\theauthor{Unknown}
+\newcommand\theauthor{Anonymous}
 \newcommand*\thesecurity{Confidential}
 \newcommand*\theid{}
 
