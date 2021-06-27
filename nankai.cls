@@ -1,8 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2021/06/24 0.0.1 Template for Nankai Documents]
+\ProvidesClass{nankai}[2021/06/24 1.01 Template for Nankai Documents]
 
 \newif\ifnosecurity
 \DeclareOption{nosecurity}{\nosecuritytrue}
+\newif\ifauthordraft
+\DeclareOption{authordraft}{\authordrafttrue}
 \newif\ifnobrand
 \DeclareOption{nobrand}{\nobrandtrue}
 \newif\ifnodate
@@ -111,6 +113,13 @@
   \fancyhf{}
   \fancyfoot[L]{
     \LeftNankaiBar{}
+    \ifauthordraft%
+      \begin{textblock}{14}[0.5,0.5](8,8)%
+        \tikz \node[minimum width=14\TPHorizModule] {%
+          \fontsize{64}{64}\selectfont\sffamily\scshape\color{gray!20}\rotatebox{30}{\ifcn草~~稿\else it is a draft\fi}
+        };%
+      \end{textblock}%
+    \else\fi%
     \ifnum\value{page}=1\else%
       \ifnobrand\else%
         \begin{textblock}{8}[0,0](1.2,0.2)%
@@ -130,7 +139,7 @@
         \headers{%
           \ifanonymous\else%
             \theauthor%
-            \ifnosecurity\else%
+            \ifnosecurity\else~%
               \theid
             \fi%
             \ifnobrand\else%
@@ -162,7 +171,7 @@
     \end{textblock}%
   }
 
-\renewcommand\maketitle{%
+  \renewcommand\maketitle{%
   \vspace*{18pt}
   {\bfseries{\Huge\thetitle}}
   \\[6pt]
@@ -170,17 +179,27 @@
     {\color{gray!50!black}\large\thesubtitle}
   \fi
   \\[18pt]
-  \ifanonymous\else%
-    \ifx\thecompany\empty\else%
-      \thecompany\newline
+  \ifnobrand\else%
+    \ifanonymous\else%
+      \ifx\thecompany\empty\else%
+        \thecompany\newline
+      \fi
     \fi
   \fi
   \ifx\theauthor\empty\else%
-    {\scshape\theauthor}%
+    {\scshape\ifanonymous
+      \ifcn匿名\else Anonymous Authors\fi
+    \else%
+      \theauthor
+    \fi}%
   \fi%
-  \ifx\theauthor\empty\else
-    \ifx\theid\empty\else
-      \;/ {\theid}
+  \ifanonymous\else%
+    \ifx\theauthor\empty\else
+      \ifnobrand\else%
+        \ifx\theid\empty\else
+          \;/ {\theid}
+        \fi
+      \fi
     \fi
   \fi\newline
   \vspace{2em}
