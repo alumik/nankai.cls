@@ -1,4 +1,4 @@
-# Nankai Document
+# nankai.cls
 
 This unofficial LaTeX package provides a class for creating documents for people working with Nankai University or maybe even inside it.
 
