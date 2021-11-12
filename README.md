@@ -1,6 +1,6 @@
 # Nankai Document
 
-This unofficial package provides a class for creating documents of Nankai University.
+This unofficial LaTeX package provides a class for creating documents for people working with Nankai University or maybe even inside it.
 
 This project is based on [huawei – Template for Huawei documents](https://ctan.org/pkg/huawei).
 
