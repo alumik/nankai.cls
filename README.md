@@ -1,6 +1,8 @@
 # Nankai Document
 
-A LaTeX template for documents of Nankai University.
+This unofficial package provides a class for creating documents of Nankai University.
+
+This project is based on [huawei – Template for Huawei documents](https://ctan.org/pkg/huawei).
 
 The user's guide can be found at [GitHub Releases](https://github.com/alumik/nankai-document/releases).
 
