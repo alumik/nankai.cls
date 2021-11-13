@@ -101,7 +101,6 @@
 \RequirePackage{tikz}
 \RequirePackage{tabularx}
 \RequirePackage{titling}
-\RequirePackage{svg}
 \RequirePackage[absolute]{textpos}
   \TPGrid{16}{16}
 \makeatletter\ifnankai@cn\RequirePackage{ctex}\else\RequirePackage[tt=false,type1=true]{libertine}\fi\makeatother%
