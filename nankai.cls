@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2021/11/13 1.02 Template for Nankai Documents]
+\ProvidesClass{nankai}[2022/03/25 1.03 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -83,7 +83,6 @@
 \RequirePackage[abspath]{currfile}
 \RequirePackage{enumitem}
   \setlist{nosep}
-\RequirePackage{microtype}
 \RequirePackage{wrapfig}
 \RequirePackage{lastpage}
 \RequirePackage{setspace}
