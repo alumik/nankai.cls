@@ -69,7 +69,6 @@
 \RequirePackage{anyfontsize}
 \RequirePackage{multicol}
 \RequirePackage{ragged2e}
-\RequirePackage{multicol}
 \RequirePackage[mmddyyyy,iso]{datetime}
   \newtimeformat{daytime}{\twodigit{\THEHOUR}:\twodigit{\THEMINUTE}}
 \RequirePackage{paralist}
@@ -99,7 +98,6 @@
   \definecolor{orange}{HTML}{F06543}
   \definecolor{nankaiPurple}{RGB}{113,26,95}
 \RequirePackage{tikz}
-\RequirePackage{tabularx}
 \RequirePackage{titling}
 \RequirePackage[absolute]{textpos}
   \TPGrid{16}{16}
@@ -309,9 +307,7 @@
 
       \vspace{0.5in}
 
-      \begin{CJK}{UTF8}{gbsn}
-      允公允能，日新月异
-      \end{CJK}
+      \ifnankai@cn 允公允能，日新月异\fi
 
       Dedication to public interests, acquisition of all-roud capability,
       \newline
