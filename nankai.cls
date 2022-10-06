@@ -88,7 +88,8 @@
 \RequirePackage{setspace}
   \setstretch{1.08}
 \RequirePackage[maxnames=1,minnames=1,natbib=true,citestyle=numeric,bibstyle=numeric,doi=false,url=false,isbn=false,isbn=false]{biblatex}
-\RequirePackage[table]{xcolor}
+\PassOptionsToPackage{table}{xcolor}
+\RequirePackage{xcolor}
   \definecolor{red}{HTML}{CF0A2C}
   \definecolor{black}{HTML}{232527}
   \definecolor{gray}{HTML}{878C8F}
