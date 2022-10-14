@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2022/10/06 1.04 Template for Nankai Documents]
+\ProvidesClass{nankai}[2022/10/14 1.05 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -199,7 +199,7 @@
   {\end{adjustwidth}}
 
 \makeatletter\renewcommand\maketitle{%
-  \vspace*{18pt}
+  \vspace*{18pt}%
   {\bfseries{\Huge\thetitle}}
   \ifx\thesubtitle\empty\else%
     \\[6pt]
