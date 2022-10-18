@@ -81,7 +81,7 @@
 \RequirePackage{array}
 \RequirePackage[hidelinks]{hyperref} % to enable \pageref* command
 \RequirePackage[abspath]{currfile}
-\RequirePackage{enumitem}
+\RequirePackage[shortlabels,inline]{enumitem}
   \setlist{nosep}
 \RequirePackage{wrapfig}
 \RequirePackage{lastpage}
