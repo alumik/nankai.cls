@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2022/10/14 1.05 Template for Nankai Documents]
+\ProvidesClass{nankai}[2022/10/18 1.5.2 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -65,25 +65,19 @@
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage{tabularx}
-\RequirePackage{anyfontsize}
 \RequirePackage{multicol}
 \RequirePackage{ragged2e}
 \RequirePackage[mmddyyyy,iso]{datetime}
   \newtimeformat{daytime}{\twodigit{\THEHOUR}:\twodigit{\THEMINUTE}}
 \RequirePackage{paralist}
   \setdefaultenum{a)}{a)}{a)}{a)}
-\RequirePackage{makecell}
 \RequirePackage[para]{footmisc}
   \setlength{\footnotemargin}{2pt}
   \setlength{\footnotesep}{2pt}
 \RequirePackage{graphicx}
-\RequirePackage{array}
 \RequirePackage[hidelinks]{hyperref} % to enable \pageref* command
-\RequirePackage[abspath]{currfile}
 \RequirePackage[shortlabels,inline]{enumitem}
   \setlist{nosep}
-\RequirePackage{wrapfig}
 \RequirePackage{lastpage}
 \RequirePackage{setspace}
   \setstretch{1.08}
@@ -99,7 +93,6 @@
   \definecolor{orange}{HTML}{F06543}
   \definecolor{nankaiPurple}{RGB}{113,26,95}
 \RequirePackage{tikz}
-\RequirePackage{titling}
 \RequirePackage[absolute]{textpos}
   \TPGrid{16}{16}
 \makeatletter\ifnankai@cn\RequirePackage{ctex}\else\RequirePackage[tt=false,type1=true]{libertine}\fi\makeatother%
