@@ -62,17 +62,17 @@
 \fi\makeatother
 
 \RequirePackage[T1]{fontenc}
+\RequirePackage[tt=false, type1=true]{libertine}
+\RequirePackage[varqu]{zi4}
+\RequirePackage[libertine]{newtxmath}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{multicol}
 \RequirePackage{ragged2e}
 \RequirePackage[mmddyyyy,iso]{datetime}
   \newtimeformat{daytime}{\twodigit{\THEHOUR}:\twodigit{\THEMINUTE}}
-\RequirePackage{paralist}
-  \setdefaultenum{a)}{a)}{a)}{a)}
 \RequirePackage[para]{footmisc}
   \setlength{\footnotemargin}{2pt}
   \setlength{\footnotesep}{2pt}
-\RequirePackage{graphicx}
 \RequirePackage[hidelinks]{hyperref} % to enable \pageref* command
 \RequirePackage[shortlabels,inline]{enumitem}
   \setlist{nosep}
@@ -247,18 +247,18 @@
   \textbf{Disclaimer}: The opinions expressed in this document are in good faith and
   while every care has been taken in preparing it,
   \ifnankai@nobrand%
-    the author%
+    the author
   \else%
-    \thecompany{}%
+    \thecompany{}
   \fi
   makes no representations and gives no warranties of whatever
   nature in respect of these documents, including but not limited to the
   accuracy or completeness of any information, facts and/or opinions contained therein.
   \ifnankai@nobrand%
-    The author%
+    The author,
   \else%
-    \thecompany{}%
-  \fi,
+    \thecompany{},
+  \fi
   its subsidiaries, the directors, employees and agents
   cannot be held liable for the use of and reliance of the opinions, estimates, forecasts and
   findings in these documents.
