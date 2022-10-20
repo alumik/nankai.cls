@@ -364,11 +364,15 @@
 \renewcommand\title[1]{\renewcommand\thetitle{#1}}
 \newcommand\thetitle{Untitled}
 \newcommand*\thecompany{College of Software, Nankai University}
+\newcommand\company[1]{\renewcommand\thecompany{#1}}
 \newcommand\thesubtitle{}
+\newcommand\subtitle[1]{\renewcommand\thesubtitle{#1}}
 \renewcommand\author[1]{\renewcommand\theauthor{#1}}
 \newcommand\theauthor{Anonymous Author(s)}
 \newcommand*\thesecurity{Confidential}
+\newcommand\security[1]{\renewcommand\thesecurity{#1}}
 \newcommand*\theid{}
+\newcommand\id[1]{\renewcommand\theid{#1}}
 
 \ifcsname nospell\endcsname\else\newcommand\nospell[1]{#1}\fi
 
