@@ -91,7 +91,7 @@
   \definecolor{blue}{HTML}{2274A5}
   \definecolor{green}{HTML}{499167}
   \definecolor{orange}{HTML}{F06543}
-  \definecolor{nankaiPurple}{RGB}{113,26,95}
+  \definecolor{NankaiPurple}{RGB}{113,26,95}
 \RequirePackage{tikz}
 \RequirePackage[absolute]{textpos}
   \TPGrid{16}{16}
@@ -110,7 +110,7 @@
 
 \makeatletter\newcommand\nankai@bar{%
   \begin{textblock}{1}[0,0](0,0)%
-    \tikz \node[fill=nankaiPurple,minimum width=\TPHorizModule,minimum height=16\TPVertModule] {};%
+    \tikz \node[fill=NankaiPurple,minimum width=\TPHorizModule,minimum height=16\TPVertModule] {};%
   \end{textblock}%
 }\makeatother
 
@@ -236,7 +236,7 @@
   \vspace*{\fill}
   \begin{center}
     \normalsize
-    {\Huge\color{nankaiPurple}\textbf{Thank you!}}
+    {\Huge\color{NankaiPurple}\textbf{Thank you!}}
   \end{center}
   \vspace*{\fill}
 }
