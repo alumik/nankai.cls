@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2022/10/18 1.5.2 Template for Nankai Documents]
+\ProvidesClass{nankai}[2022/10/20 1.6.0 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -90,7 +90,17 @@
   \definecolor{green}{HTML}{499167}
   \definecolor{orange}{HTML}{F06543}
   \definecolor{NankaiPurple}{RGB}{113,26,95}
+  \definecolor{NankaiPurpleBg}{HTML}{EADDE7}
 \RequirePackage{tikz}
+\RequirePackage{mdframed}
+  \mdfdefinestyle{NankaiNote}{
+    topline=false,
+    bottomline=false,
+    rightline=false,
+    backgroundcolor=NankaiPurpleBg,
+    linecolor=NankaiPurple,
+    linewidth=3pt
+  }
 \RequirePackage[absolute]{textpos}
   \TPGrid{16}{16}
 \makeatletter\ifnankai@cn\RequirePackage{ctex}\else\RequirePackage[tt=false,type1=true]{libertine}\fi\makeatother%
@@ -365,6 +375,8 @@
 \newcommand\security[1]{\renewcommand\thesecurity{#1}}
 \newcommand*\theid{}
 \newcommand\id[1]{\renewcommand\theid{#1}}
+
+\newenvironment{note}{\begin{mdframed}[style=NankaiNote]}{\end{mdframed}}
 
 \ifcsname nospell\endcsname\else\newcommand\nospell[1]{#1}\fi
 
