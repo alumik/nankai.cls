@@ -27,8 +27,6 @@
 \LoadClass[12pt]{article}
 
 \makeatletter
-\newif\ifnankai@dark
-\DeclareOption{dark}{\nankai@darktrue}
 \newif\ifnankai@slides
 \DeclareOption{slides}{\nankai@slidestrue}
 \newif\ifnankai@nosecurity
@@ -342,12 +340,6 @@
     \begin{multicols}{2}\setstretch{0.95}\printbibliography\end{multicols}
   \fi
 }\makeatother
-
-\makeatletter\ifnankai@dark
-  \RequirePackage{pagecolor}
-  \pagecolor{black}
-  \color{white}
-\fi
 
 \AtBeginDocument{%
 \raggedbottom%
