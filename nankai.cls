@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2022/10/20 1.6.0 Template for Nankai Documents]
+\ProvidesClass{nankai}[2022/10/21 1.6.1 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -90,14 +90,13 @@
   \definecolor{green}{HTML}{499167}
   \definecolor{orange}{HTML}{F06543}
   \definecolor{NankaiPurple}{RGB}{113,26,95}
-  \definecolor{NankaiPurpleBg}{HTML}{EADDE7}
 \RequirePackage{tikz}
 \RequirePackage{mdframed}
   \mdfdefinestyle{NankaiNote}{
     topline=false,
     bottomline=false,
     rightline=false,
-    backgroundcolor=NankaiPurpleBg,
+    backgroundcolor=NankaiPurple!20,
     linecolor=NankaiPurple,
     linewidth=3pt
   }
