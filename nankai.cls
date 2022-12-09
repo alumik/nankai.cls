@@ -134,7 +134,7 @@
     \ifnankai@authordraft%
       \begin{textblock}{14}[0.5,0.5](8,8)%
         \tikz \node[minimum width=14\TPHorizModule] {%
-          \fontsize{64}{64}\selectfont\sffamily\scshape\color{gray!20}\rotatebox{30}{\ifnankai@cn 草~~稿\else it is a draft\fi}
+          \fontsize{64}{64}\selectfont\sffamily\scshape\color{gray!20}\rotatebox{30}{\ifnankai@cn 草~~稿\else It is a draft\fi}
         };%
       \end{textblock}%
     \else\fi%
@@ -200,12 +200,10 @@
 
 \makeatletter\renewcommand\maketitle{%
   \vspace*{18pt}%
-  {\bfseries{\Huge\thetitle}}
+  {\bfseries{\Huge\thetitle\par}}
   \ifx\thesubtitle\empty\else%
-    \\[6pt]
-    {\color{gray!50!black}\large\thesubtitle}
+    {\color{gray!50!black}\large\thesubtitle\par}
   \fi
-  \\[18pt]
   \ifnankai@nobrand\else%
     \ifnankai@anonymous\else%
       \ifx\thecompany\empty\else%
@@ -235,7 +233,7 @@
 \newcommand\PrintCrumb[2]{%
   \begin{minipage}{\columnwidth}%
     \raggedright\textsc{#1}:\\#2%
-  \end{minipage}\vspace{4pt}%
+  \end{minipage}\vspace{1em}%
 }
 
 \newcommand\PrintThankYouPage{
