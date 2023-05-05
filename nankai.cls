@@ -27,6 +27,10 @@
 \LoadClass[12pt]{article}
 
 \makeatletter
+\DeclareOption{breaks}{
+  \let\nankai@oldsection\section
+  \renewcommand\section{\clearpage\nankai@oldsection}
+}
 \newif\ifnankai@slides
 \DeclareOption{slides}{\nankai@slidestrue}
 \newif\ifnankai@nosecurity
