@@ -121,8 +121,8 @@
   \end{textblock}%
 }\makeatother
 
-\makeatletter\newcommand\nankai@logo{
-  \includegraphics[width=.3\linewidth]{nankai-logo}
+\makeatletter\newcommand\nankai@logo[1]{
+  \includegraphics[width=#1\linewidth]{nankai-logo}
 }
 
 \RequirePackage{fancyhdr}
@@ -143,7 +143,7 @@
     \ifnum\value{page}=1\else%
       \ifnankai@nobrand\else%
         \begin{textblock}{8}[0,0](1.2,0.2)%
-          \nankai@logo%
+          \nankai@logo{\ifnankai@slides 0.4\else 0.3\fi}%
         \end{textblock}%
       \fi%
     \fi%
