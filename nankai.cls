@@ -1,7 +1,7 @@
 % (The MIT License)
 %
-% Copyright (c) 2021-2022 Yegor Bugayenko
-% Copyright (c) 2021-2022 Zhenyu Zhong
+% Copyright (c) 2021-2023 Yegor Bugayenko
+% Copyright (c) 2021-2023 Zhenyu Zhong
 %
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the 'Software'), to deal
@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2022/10/21 1.6.1 Template for Nankai Documents]
+\ProvidesClass{nankai}[2023/05/05 1.7.0 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
