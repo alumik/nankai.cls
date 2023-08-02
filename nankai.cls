@@ -72,7 +72,8 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{multicol}
 \RequirePackage{ragged2e}
-\RequirePackage[mmddyyyy,iso]{datetime}
+\PassOptionsToPackage{mmddyyyy,iso}{datetime}
+\RequirePackage{datetime}
 \newtimeformat{daytime}{\twodigit{\THEHOUR}:\twodigit{\THEMINUTE}}
 \RequirePackage[para]{footmisc}
 \setlength{\footnotemargin}{2pt}
