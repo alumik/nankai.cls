@@ -217,6 +217,65 @@ When you need to put many small information pieces into one page, we recommend y
 \end{document}
 \end{lstlisting}
 
+\section{Examples}
+
+\subsection{Figures}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.3\linewidth]{example-image-a}
+    \caption{This is a figure.}
+    \label{fig:example}
+\end{figure}
+
+Figures are usually placed in the \ff{figures} subdirectory.
+Here is how you can include a figure:
+
+\begin{lstlisting}[style=latex]
+\begin{figure}
+    \centering
+    \includegraphics[width=0.3\linewidth]{example-image-a}
+    \caption{This is a figure.}
+    \label{fig:example}
+\end{figure}
+\end{lstlisting}
+
+And you can refer to it like this: \ff{\char`\\ref\{fig:example\}}: Figure~\ref{fig:example}.
+
+\subsection{Tables}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+        \textbf{A} & \textbf{B} \\
+        \midrule
+        1          & 2          \\
+        \bottomrule
+    \end{tabular}
+    \caption{This is a table.}
+    \label{tab:example}
+\end{table}
+
+Here is how you can include a table:
+
+\begin{lstlisting}[style=latex]
+\begin{table}
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+        \textbf{A} & \textbf{B} \\
+        \midrule
+        1          & 2          \\
+        \bottomrule
+    \end{tabular}
+    \caption{This is a table.}
+    \label{tab:example}
+\end{table}
+\end{lstlisting}
+
+And you can refer to it like this: \ff{\char`\\ref\{tab:example\}}: Table~\ref{tab:example}.
+
 \PrintDisclaimer
 \PrintThankYouPage
 
