@@ -77,7 +77,8 @@
 \RequirePackage[para]{footmisc}
 \setlength{\footnotemargin}{2pt}
 \setlength{\footnotesep}{2pt}
-\RequirePackage[hidelinks]{hyperref} % to enable \pageref* command
+\PassOptionsToPackage{hidelinks}{hyperref}
+\RequirePackage{hyperref}
 \RequirePackage[shortlabels,inline]{enumitem}
 \setlist{nosep}
 \RequirePackage{lastpage}
