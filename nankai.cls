@@ -75,7 +75,8 @@
 \PassOptionsToPackage{mmddyyyy,iso}{datetime}
 \RequirePackage{datetime}
 \newtimeformat{daytime}{\twodigit{\THEHOUR}:\twodigit{\THEMINUTE}}
-\RequirePackage[para]{footmisc}
+\PassOptionsToPackage{para}{footmisc}
+\RequirePackage{footmisc}
 \setlength{\footnotemargin}{2pt}
 \setlength{\footnotesep}{2pt}
 \PassOptionsToPackage{hidelinks}{hyperref}
