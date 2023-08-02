@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2023/05/05 1.7.0 Template for Nankai Documents]
+\ProvidesClass{nankai}[2023/08/02 1.7.1 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -83,7 +83,7 @@
 \RequirePackage{lastpage}
 \RequirePackage{setspace}
   \setstretch{1.08}
-\RequirePackage[maxnames=1,minnames=1,natbib=true,citestyle=numeric,bibstyle=numeric,doi=false,url=false,isbn=false,isbn=false]{biblatex}
+\RequirePackage[maxnames=1,minnames=1,natbib=true,citestyle=numeric,bibstyle=numeric,url=false,isbn=false,isbn=false]{biblatex}
 \PassOptionsToPackage{table}{xcolor}
 \RequirePackage{xcolor}
   \definecolor{red}{HTML}{CF0A2C}
