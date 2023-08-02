@@ -114,6 +114,10 @@
 \RequirePackage{caption}
 \makeatletter\ifnankai@cn\RequirePackage{ctex}\else\RequirePackage[tt=false,type1=true]{libertine}\fi\makeatother%
 
+\makeatletter
+\g@addto@macro\@floatboxreset\centering
+\makeatother
+
 \makeatletter\newcommand\nankai@header[1]{{%
             \ifnankai@slides%
                 \setstretch{0.8}%
