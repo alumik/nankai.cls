@@ -66,7 +66,8 @@
 \fi\makeatother
 
 \RequirePackage[T1]{fontenc}
-\RequirePackage[tt=false, type1=true]{libertine}
+\PassOptionsToPackage{tt=false,type1=true}{libertine}
+\RequirePackage{libertine}
 \RequirePackage[varqu]{zi4}
 \RequirePackage[libertine]{newtxmath}
 \RequirePackage[utf8]{inputenc}
