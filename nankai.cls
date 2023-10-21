@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2023/10/21 1.7.2 Template for Nankai Documents]
+\ProvidesClass{nankai}[2023/10/21 1.7.3 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -211,6 +211,7 @@
     \ifx\thesubtitle\empty\else%
         {\color{gray!50!black}\large\raggedright\thesubtitle\par}%
     \fi%
+    \vspace{2em}%
     \ifdefined\nankai@nobrand\else%
         \ifdefined\nankai@anonymous\else%
             \ifx\thecompany\empty\else%
