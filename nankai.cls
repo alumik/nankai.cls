@@ -26,42 +26,64 @@
 
 \LoadClass[12pt]{article}
 
-\makeatletter
-\DeclareOption{breaks}{
-    \let\nankai@oldsection\section
-    \renewcommand\section{\clearpage\nankai@oldsection}
+% \makeatletter
+% \DeclareOption{breaks}{
+%     \let\nankai@oldsection\section
+%     \renewcommand\section{\clearpage\nankai@oldsection}
+% }
+% \newif\ifdefined\nankai@slides
+% \DeclareOption{slides}{\nankai@slidestrue}
+% \newif\ifdefined\nankai@nosecurity
+% \DeclareOption{nosecurity}{\nankai@nosecuritytrue}
+% \newif\ifdefined\nankai@authordraft
+% \DeclareOption{authordraft}{\nankai@authordrafttrue}
+% \newif\ifdefined\nankai@nobrand
+% \DeclareOption{nobrand}{\nankai@nobrandtrue}
+% \newif\ifdefined\nankai@nodate
+% \DeclareOption{nodate}{\nankai@nodatetrue}
+% \newif\ifdefined\nankai@nocover
+% \DeclareOption{nocover}{\nankai@nocovertrue}
+% \newif\ifdefined\nankai@nopaging
+% \DeclareOption{nopaging}{\nankai@nopagingtrue}
+% \newif\ifdefined\nankai@landscape
+% \DeclareOption{landscape}{\nankai@landscapetrue}
+% \newif\ifdefined\nankai@anonymous
+% \DeclareOption{anonymous}{\nankai@anonymoustrue}
+% \newif\ifdefined\nankai@cn
+% \DeclareOption{cn}{\nankai@cntrue}
+% \ProcessOptions\relax
+% \makeatother
+
+\RequirePackage{pgfopts}
+\pgfkeys{
+    /nankai/.cd,
+    breaks/.store in=\nankai@breaks,
+    slides/.store in=\nankai@slides,
+    nosecurity/.store in=\nankai@nosecurity,
+    authordraft/.store in=\nankai@authordraft,
+    nobrand/.store in=\nankai@nobrand,
+    nodate/.store in=\nankai@nodate,
+    nocover/.store in=\nankai@nocover,
+    nopaging/.store in=\nankai@nopaging,
+    landscape/.store in=\nankai@landscape,
+    anonymous/.store in=\nankai@anonymous,
+    cn/.store in=\nankai@cn,
 }
-\newif\ifnankai@slides
-\DeclareOption{slides}{\nankai@slidestrue}
-\newif\ifnankai@nosecurity
-\DeclareOption{nosecurity}{\nankai@nosecuritytrue}
-\newif\ifnankai@authordraft
-\DeclareOption{authordraft}{\nankai@authordrafttrue}
-\newif\ifnankai@nobrand
-\DeclareOption{nobrand}{\nankai@nobrandtrue}
-\newif\ifnankai@nodate
-\DeclareOption{nodate}{\nankai@nodatetrue}
-\newif\ifnankai@nocover
-\DeclareOption{nocover}{\nankai@nocovertrue}
-\newif\ifnankai@nopaging
-\DeclareOption{nopaging}{\nankai@nopagingtrue}
-\newif\ifnankai@landscape
-\DeclareOption{landscape}{\nankai@landscapetrue}
-\newif\ifnankai@anonymous
-\DeclareOption{anonymous}{\nankai@anonymoustrue}
-\newif\ifnankai@cn
-\DeclareOption{cn}{\nankai@cntrue}
-\ProcessOptions\relax
-\makeatother
+\ProcessPgfPackageOptions{/nankai}
+
+\makeatletter\ifdefined\nankai@breaks
+\let\nankai@oldsection\section
+\renewcommand\section{\clearpage\nankai@oldsection}
+\fi\makeatother
 
 \RequirePackage{geometry}
-\makeatletter\ifnankai@landscape
+\makeatletter\ifdefined\nankai@landscape
     \geometry{paperwidth=16in, paperheight=9in, left=4in, right=2in, top=1.5in, bottom=1.5in}
 \else
     \geometry{a4paper, left=1.5in, right=1in, top=1.2in, bottom=1.2in}
 \fi\makeatother
 
-\makeatletter\ifnankai@slides
+\makeatletter\ifdefined\nankai@slides
     \usepackage[fontsize=24pt]{fontsize}
 \fi\makeatother
 
@@ -113,14 +135,14 @@
 \RequirePackage{booktabs}
 \PassOptionsToPackage{font={small,sf}}{caption}
 \RequirePackage{caption}
-\makeatletter\ifnankai@cn\RequirePackage{ctex}\else\RequirePackage[tt=false,type1=true]{libertine}\fi\makeatother%
+\makeatletter\ifdefined\nankai@cn\RequirePackage{ctex}\else\RequirePackage[tt=false,type1=true]{libertine}\fi\makeatother%
 
 \makeatletter
 \g@addto@macro\@floatboxreset\centering
 \makeatother
 
 \makeatletter\newcommand\nankai@header[1]{{%
-            \ifnankai@slides%
+            \ifdefined\nankai@slides%
                 \setstretch{0.8}%
                 \fontsize{19pt}{24pt}\selectfont%
             \else%
@@ -146,19 +168,19 @@
 \fancyhf{}
 \makeatletter\fancyfoot[L]{
     \nankai@bar
-    \ifnankai@authordraft%
+    \ifdefined\nankai@authordraft%
         \begin{textblock}{14}[0.5,0.5](8,8)%
             \tikz \node[minimum width=14\TPHorizModule] {%
-                \fontsize{64}{64}\selectfont\sffamily\scshape\color{gray!20}\rotatebox{30}{\ifnankai@cn 草~~稿\else It is a draft\fi}
+                \fontsize{64}{64}\selectfont\sffamily\scshape\color{gray!20}\rotatebox{30}{\ifdefined\nankai@cn 草~~稿\else It is a draft\fi}
             };%
         \end{textblock}%
     \else\fi%
 }\makeatother
 \makeatletter\fancyhead[L]{
     \ifnum\value{page}=1\else%
-        \ifnankai@nobrand\else%
+        \ifdefined\nankai@nobrand\else%
             \begin{textblock}{8}[0,0](1.2,0.2)%
-                \nankai@logo{\ifnankai@slides 0.4\else 0.3\fi}%
+                \nankai@logo{\ifdefined\nankai@slides 0.4\else 0.3\fi}%
             \end{textblock}%
         \fi%
     \fi%
@@ -166,7 +188,7 @@
 \makeatletter\fancyhead[R]{
     \begin{textblock}{8}[1,0](15.8,0.2)%
         \raggedleft\nankai@header{%
-            \ifnankai@nosecurity\else%
+            \ifdefined\nankai@nosecurity\else%
                 \thesecurity
             \fi%
         }%
@@ -176,16 +198,16 @@
     \begin{textblock}{8}[0,1](1.2,15.8)%
         \ifnum\value{page}=1\else%
         \nankai@header{\raggedright%
-            \ifnankai@anonymous\else%
+            \ifdefined\nankai@anonymous\else%
                 \theauthor%
-                \ifnankai@nosecurity\else%
+                \ifdefined\nankai@nosecurity\else%
                     \ifx\theid\empty\else, \theid\fi
                 \fi%
-                \ifnankai@nobrand\else%
+                \ifdefined\nankai@nobrand\else%
                     \newline
                 \fi%
             \fi%
-            \ifnankai@nobrand\else%
+            \ifdefined\nankai@nobrand\else%
                 \thecompany{}
             \fi%
         }%
@@ -194,14 +216,14 @@
     \begin{textblock}{8}[1,1](15.8,15.8)%
         \raggedleft\nankai@header{%
             \ifnum\value{page}=1\else%
-            \ifnankai@nopaging\else%
-                \ifnankai@cn 第 \thepage{} 页, 共 \pageref*{LastPage} 页\else Page \#\thepage{} of \pageref*{LastPage}\fi%
-                \ifnankai@nodate\else%
+            \ifdefined\nankai@nopaging\else%
+                \ifdefined\nankai@cn 第 \thepage{} 页, 共 \pageref*{LastPage} 页\else Page \#\thepage{} of \pageref*{LastPage}\fi%
+                \ifdefined\nankai@nodate\else%
                     \\
                 \fi%
             \fi%
             \fi%
-            \ifnankai@nodate\else%
+            \ifdefined\nankai@nodate\else%
                 \today{} \settimeformat{daytime}\currenttime{}%
             \fi%
         }%
@@ -219,23 +241,23 @@
     \ifx\thesubtitle\empty\else%
         {\color{gray!50!black}\large\thesubtitle\par}
     \fi
-    \ifnankai@nobrand\else%
-        \ifnankai@anonymous\else%
+    \ifdefined\nankai@nobrand\else%
+        \ifdefined\nankai@anonymous\else%
             \ifx\thecompany\empty\else%
                 \thecompany\newline
             \fi
         \fi
     \fi
     \ifx\theauthor\empty\else%
-        {\scshape\ifnankai@anonymous
-                \ifnankai@cn 匿名\else Anonymous Authors\fi%
+        {\scshape\ifdefined\nankai@anonymous
+                \ifdefined\nankai@cn 匿名\else Anonymous Authors\fi%
             \else%
                 \theauthor
             \fi}%
     \fi%
-    \ifnankai@anonymous\else%
+    \ifdefined\nankai@anonymous\else%
         \ifx\theauthor\empty\else
-            \ifnankai@nobrand\else%
+            \ifdefined\nankai@nobrand\else%
                 \ifx\theid\empty\else
                     $\;$/ {\theid}
                 \fi
@@ -268,7 +290,7 @@
     \sffamily\scriptsize\color{gray!50!black}%
     \textbf{Disclaimer}: The opinions expressed in this document are in good faith and
     while every care has been taken in preparing it,
-    \ifnankai@nobrand%
+    \ifdefined\nankai@nobrand%
         the author
     \else%
         \thecompany{}
@@ -276,7 +298,7 @@
     makes no representations and gives no warranties of whatever
     nature in respect of these documents, including but not limited to the
     accuracy or completeness of any information, facts and/or opinions contained therein.
-    \ifnankai@nobrand%
+    \ifdefined\nankai@nobrand%
         The author,
     \else%
         \thecompany{},
@@ -289,7 +311,7 @@
 }\makeatother
 
 \makeatletter\newcommand\PrintFirstPage[1]{
-    \ifnankai@landscape\else
+    \ifdefined\nankai@landscape\else
         \PackageError{nankai}{It's allowed to use PrintFirstPage only in landscape mode}{Read nankai.pdf for more information}
     \fi
     \nankai@bar
@@ -300,7 +322,7 @@
     \fi
     \vspace*{0.5in}
     \maketitle
-    \ifnankai@nocover\else
+    \ifdefined\nankai@nocover\else
         \begin{textblock}{14}[1,1](14,14)
             \raggedleft\includegraphics[height=3.6in]{cover-picture.pdf}
         \end{textblock}
@@ -308,7 +330,7 @@
 }\makeatother
 
 \makeatletter\newcommand\PrintLastPage{
-    \ifnankai@landscape\else
+    \ifdefined\nankai@landscape\else
         \PackageError{nankai}{It's allowed to use PrintLastPage only in landscape mode}{Read nankai.pdf for more information}
     \fi
     \newpage
@@ -321,7 +343,7 @@
 
             \vspace{0.5in}
 
-            \ifnankai@cn 允公允能，日新月异\fi
+            \ifdefined\nankai@cn 允公允能，日新月异\fi
 
             Dedication to public interests, acquisition of all-roud capability,
             \newline
@@ -341,7 +363,7 @@
             from those expressed or implied in the predictive statements.
             Therefore, such information is provided for reference purpose
             only and constitutes neither an offer nor an acceptance.
-            \ifnankai@nobrand%
+            \ifdefined\nankai@nobrand%
                 The author%
             \else%
                 \thecompany{}%
@@ -356,7 +378,7 @@
     \AtNextBibliography{\small}
     \newpage
     \raggedright
-    \ifnankai@landscape
+    \ifdefined\nankai@landscape
         \begin{multicols}{3}\setstretch{0.95}\printbibliography\end{multicols}
     \else
         \begin{multicols}{2}\setstretch{0.95}\printbibliography\end{multicols}
