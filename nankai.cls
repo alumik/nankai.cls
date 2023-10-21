@@ -26,34 +26,6 @@
 
 \LoadClass[12pt]{article}
 
-% \makeatletter
-% \DeclareOption{breaks}{
-%     \let\nankai@oldsection\section
-%     \renewcommand\section{\clearpage\nankai@oldsection}
-% }
-% \newif\ifdefined\nankai@slides
-% \DeclareOption{slides}{\nankai@slidestrue}
-% \newif\ifdefined\nankai@nosecurity
-% \DeclareOption{nosecurity}{\nankai@nosecuritytrue}
-% \newif\ifdefined\nankai@authordraft
-% \DeclareOption{authordraft}{\nankai@authordrafttrue}
-% \newif\ifdefined\nankai@nobrand
-% \DeclareOption{nobrand}{\nankai@nobrandtrue}
-% \newif\ifdefined\nankai@nodate
-% \DeclareOption{nodate}{\nankai@nodatetrue}
-% \newif\ifdefined\nankai@nocover
-% \DeclareOption{nocover}{\nankai@nocovertrue}
-% \newif\ifdefined\nankai@nopaging
-% \DeclareOption{nopaging}{\nankai@nopagingtrue}
-% \newif\ifdefined\nankai@landscape
-% \DeclareOption{landscape}{\nankai@landscapetrue}
-% \newif\ifdefined\nankai@anonymous
-% \DeclareOption{anonymous}{\nankai@anonymoustrue}
-% \newif\ifdefined\nankai@cn
-% \DeclareOption{cn}{\nankai@cntrue}
-% \ProcessOptions\relax
-% \makeatother
-
 \RequirePackage{pgfopts}
 \pgfkeys{
     /nankai/.cd,
@@ -72,8 +44,8 @@
 \ProcessPgfPackageOptions{/nankai}
 
 \makeatletter\ifdefined\nankai@breaks
-\let\nankai@oldsection\section
-\renewcommand\section{\clearpage\nankai@oldsection}
+    \let\nankai@oldsection\section
+    \renewcommand\section{\clearpage\nankai@oldsection}
 \fi\makeatother
 
 \RequirePackage{geometry}
@@ -373,16 +345,22 @@
     \end{center}%
 }\makeatother
 
-\makeatletter\newcommand\PrintBibliography{
-    \setlength\bibitemsep{3pt}
-    \AtNextBibliography{\small}
-    \newpage
-    \raggedright
-    \ifdefined\nankai@landscape
-        \begin{multicols}{3}\setstretch{0.95}\printbibliography\end{multicols}
-    \else
-        \begin{multicols}{2}\setstretch{0.95}\printbibliography\end{multicols}
-    \fi
+\makeatletter\newcommand\PrintBibliography{%
+    \setlength\bibitemsep{3pt}%
+    \AtNextBibliography{\small}%
+    \ifdefined\huawei@breaks\newpage\fi%
+    \begingroup%
+    \raggedright%
+    \setstretch{0.95}%
+    \ifdefined\huawei@landscape%
+        \begin{multicols}{3}\printbibliography\end{multicols}%
+    \else%
+        \ifdefined\huawei@breaks%
+            \begin{multicols}{2}\printbibliography\end{multicols}%
+        \else%
+            \printbibliography%
+        \fi%
+    \fi%
 }\makeatother
 
 \AtBeginDocument{%
