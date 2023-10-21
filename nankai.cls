@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2023/08/02 1.7.1 Template for Nankai Documents]
+\ProvidesClass{nankai}[2023/10/21 1.7.2 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -109,9 +109,7 @@
 \RequirePackage{caption}
 \makeatletter\ifdefined\nankai@cn\RequirePackage{ctex}\else\RequirePackage[tt=false,type1=true]{libertine}\fi\makeatother%
 
-\makeatletter
-\g@addto@macro\@floatboxreset\centering
-\makeatother
+\makeatletter\g@addto@macro\@floatboxreset\centering\makeatother
 
 \makeatletter\newcommand\nankai@header[1]{{%
             \ifdefined\nankai@slides%
@@ -122,17 +120,17 @@
                 \fontsize{11pt}{13pt}\selectfont%
             \fi%
             \sffamily\color{gray}#1\par%
-        }}\makeatother
+        }}\makeatother%
 
 \makeatletter\newcommand\nankai@bar{%
     \begin{textblock}{1}[0,0](0,0)%
         \tikz \node[fill=NankaiPurple,minimum width=\TPHorizModule,minimum height=16\TPVertModule] {};%
     \end{textblock}%
-}\makeatother
+}\makeatother%
 
-\makeatletter\newcommand\nankai@logo[1]{
-    \includegraphics[width=#1\linewidth]{nankai-logo}
-}
+\makeatletter\newcommand\nankai@logo[1]{%
+    \includegraphics[width=#1\linewidth]{nankai-logo}%
+}%
 
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
@@ -161,7 +159,7 @@
     \begin{textblock}{8}[1,0](15.8,0.2)%
         \raggedleft\nankai@header{%
             \ifdefined\nankai@nosecurity\else%
-                \thesecurity
+                \thesecurity%
             \fi%
         }%
     \end{textblock}%
@@ -173,14 +171,14 @@
             \ifdefined\nankai@anonymous\else%
                 \theauthor%
                 \ifdefined\nankai@nosecurity\else%
-                    \ifx\theid\empty\else, \theid\fi
+                    \ifx\theid\empty\else, \theid\fi%
                 \fi%
                 \ifdefined\nankai@nobrand\else%
                     \newline
                 \fi%
             \fi%
             \ifdefined\nankai@nobrand\else%
-                \thecompany{}
+                \thecompany{}%
             \fi%
         }%
         \fi%
@@ -209,34 +207,37 @@
 
 \makeatletter\renewcommand\maketitle{%
     \vspace*{18pt}%
-    {\bfseries{\Huge\thetitle\par}}
+    {\bfseries{\Huge\raggedright\thetitle\par}}%
     \ifx\thesubtitle\empty\else%
-        {\color{gray!50!black}\large\thesubtitle\par}
-    \fi
+        {\color{gray!50!black}\large\raggedright\thesubtitle\par}%
+    \fi%
     \ifdefined\nankai@nobrand\else%
         \ifdefined\nankai@anonymous\else%
             \ifx\thecompany\empty\else%
-                \thecompany\newline
-            \fi
-        \fi
-    \fi
-    \ifx\theauthor\empty\else%
-        {\scshape\ifdefined\nankai@anonymous
-                \ifdefined\nankai@cn 匿名\else Anonymous Authors\fi%
-            \else%
-                \theauthor
-            \fi}%
+                \thecompany\par%
+            \fi%
+        \fi%
     \fi%
-    \ifdefined\nankai@anonymous\else%
-        \ifx\theauthor\empty\else
-            \ifdefined\nankai@nobrand\else%
-                \ifx\theid\empty\else
-                    $\;$/ {\theid}
-                \fi
-            \fi
-        \fi
-    \fi
-    \vspace{2em}
+    \parbox{.6\textwidth}{\raggedright%
+        \ifx\theauthor\empty\else%
+            {\scshape\ifdefined\nankai@anonymous%
+                    \ifdefined\nankai@cn 匿名作者\else Anonymous Author(s)\fi%
+                \else%
+                    \theauthor%
+                \fi}%
+        \fi%
+        \ifdefined\nankai@anonymous\else%
+            \ifx\theauthor\empty\else%
+                \ifdefined\nankai@nobrand\else%
+                    \ifx\theid\empty\else%
+                        $\;$/ {\theid}%
+                    \fi%
+                \fi%
+            \fi%
+        \fi%
+        \par%
+    }%
+    \vspace{2em}%
 }\makeatother
 
 \newcommand\PrintCrumb[2]{%
@@ -278,55 +279,55 @@
     its subsidiaries, the directors, employees and agents
     cannot be held liable for the use of and reliance of the opinions, estimates, forecasts and
     findings in these documents.
-    \par
+    \par%
     \endgroup%
 }\makeatother
 
-\makeatletter\newcommand\PrintFirstPage[1]{
-    \ifdefined\nankai@landscape\else
+\makeatletter\newcommand\PrintFirstPage[1]{%
+    \ifdefined\nankai@landscape\else%
         \PackageError{nankai}{It's allowed to use PrintFirstPage only in landscape mode}{Read nankai.pdf for more information}
-    \fi
-    \nankai@bar
+    \fi%
+    \nankai@bar%
     \def\param{#1}%
-    \ifx\param\empty\else
-        \includegraphics[height=2in]{#1}
-        \newline
-    \fi
-    \vspace*{0.5in}
-    \maketitle
-    \ifdefined\nankai@nocover\else
-        \begin{textblock}{14}[1,1](14,14)
-            \raggedleft\includegraphics[height=3.6in]{cover-picture.pdf}
-        \end{textblock}
-    \fi
+    \ifx\param\empty\else%
+        \includegraphics[height=2in]{#1}%
+        \newline%
+    \fi%
+    \vspace*{0.5in}%
+    \maketitle%
+    \ifdefined\nankai@nocover\else%
+        \begin{textblock}{14}[1,1](14,14)%
+            \raggedleft\includegraphics[height=3.6in]{cover-picture.pdf}%
+        \end{textblock}%
+    \fi%
 }\makeatother
 
 \makeatletter\newcommand\PrintLastPage{
     \ifdefined\nankai@landscape\else
         \PackageError{nankai}{It's allowed to use PrintLastPage only in landscape mode}{Read nankai.pdf for more information}
-    \fi
-    \newpage
-    \vspace*{1in}
-    \begin{center}
-        \begin{minipage}{0.6\columnwidth}\raggedright
-            \normalsize
-            \setlength{\parskip}{6pt}
-            {\Huge\color{red}\textbf{Thank you!}}
-
-            \vspace{0.5in}
-
+    \fi%
+    \newpage%
+    \vspace*{1in}%
+    \begin{center}%
+        \begin{minipage}{0.6\columnwidth}\raggedright%
+            \normalsize%
+            \setlength{\parskip}{6pt}%
+            {\Huge\color{red}\textbf{Thank you!}}%
+            \par%
+            \vspace{0.5in}%
+            \par%
             \ifdefined\nankai@cn 允公允能，日新月异\fi
 
             Dedication to public interests, acquisition of all-roud capability,
-            \newline
+            \newline%
             and aspiration for progress with each passing day.
-
+            \par%
             \textbf{%
                 Copyright \copyright{} \the\year{} \thecompany{}
                 \newline
                 All Rights Reserved.%
             }
-
+            \par%
             The information in this document may contain predictive
             statements including, without limitation, statements regarding
             the future financial and operating results, future product
@@ -339,7 +340,7 @@
                 The author%
             \else%
                 \thecompany{}%
-            \fi
+            \fi%
             may change the information at any time without notice.
         \end{minipage}
     \end{center}%
@@ -382,7 +383,9 @@
 \newcommand\thesubtitle{}
 \newcommand\subtitle[1]{\renewcommand\thesubtitle{#1}}
 \renewcommand\author[1]{\renewcommand\theauthor{#1}}
-\newcommand\theauthor{Anonymous Author(s)}
+\makeatletter
+\newcommand\theauthor{\ifdefined\nankai@cn 匿名作者\else Anonymous Author(s)\fi}
+\makeatother
 \newcommand*\thesecurity{Confidential}
 \newcommand\security[1]{\renewcommand\thesecurity{#1}}
 \newcommand*\theid{}
