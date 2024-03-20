@@ -374,7 +374,7 @@
     \setlength\parindent{0pt}%
     \setlength\parskip{6pt}%
     \setlength\columnsep{32pt}%
-    \def\arraystretch{1.5}%
+    \renewcommand{\arraystretch}{1}%
 }
 
 \renewcommand\title[1]{\renewcommand\thetitle{#1}}
