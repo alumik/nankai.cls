@@ -207,7 +207,7 @@
 
 \makeatletter\renewcommand\maketitle{%
     \vspace*{18pt}%
-    {\bfseries{\Huge\raggedright\thetitle\par}}%
+    {\bfseries{\begin{spacing}{.9}\Huge\raggedright\thetitle\par\end{spacing}}}%
     \ifx\thesubtitle\empty\else%
         {\color{gray!50!black}\large\raggedright\thesubtitle\par}%
     \fi%
