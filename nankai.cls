@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2023/10/21 1.7.3 Template for Nankai Documents]
+\ProvidesClass{nankai}[2024/03/20 1.7.4 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
