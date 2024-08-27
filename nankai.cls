@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2024/03/20 1.7.4 Template for Nankai Documents]
+\ProvidesClass{nankai}[2024/08/27 1.8.0 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -350,14 +350,14 @@
 \makeatletter\newcommand\PrintBibliography{%
     \setlength\bibitemsep{3pt}%
     \AtNextBibliography{\small}%
-    \ifdefined\huawei@breaks\newpage\fi%
+    \ifdefined\nankai@breaks\newpage\fi%
     \begingroup%
     \raggedright%
     \setstretch{0.95}%
-    \ifdefined\huawei@landscape%
+    \ifdefined\nankai@landscape%
         \begin{multicols}{3}\printbibliography\end{multicols}%
     \else%
-        \ifdefined\huawei@breaks%
+        \ifdefined\nankai@breaks%
             \begin{multicols}{2}\printbibliography\end{multicols}%
         \else%
             \printbibliography%
