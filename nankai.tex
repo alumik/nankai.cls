@@ -74,28 +74,30 @@ In order to compile the document, just say \ff{latexmk -pdf} on the command line
 There are a few class options, provided in square brackets after the \ff{\char`\\documentclass}, which can help you fine-tune the layout of your document:
 
 \begin{itemize}
-    \item \ff{landscape}
-          makes the document in landscape format, also changing the size of the paper to 16x9 inches (the default page size is \href{https://en.wikipedia.org/wiki/Paper_size}{A4}), making it perfect for presentations.
-    \item \ff{slides}
-          makes all headers larger, assuming the document is in landscape mode and presented as a slide deck.
-    \item \ff{nocover}
-          avoid printing the cover images on the first page by the \ff{\char`\\PrintFirstPage} command.
     \item \ff{anonymous}
           removes the name of the author everywhere, including the bottom of the page, where the author's name stays next to the name of the company.
+    \item \ff{authordraft}
+          prints a big ``It is a draft'' message across each page.
+    \item \ff{boring}
+          makes the document look boring, with less colors, and no fancy fonts.
+    \item \ff{breaks}
+          forces all |\section| to start from a new page.
+    \item \ff{cn}
+          sets the language to simplified Chinese.
+    \item \ff{landscape}
+          makes the document in landscape format, also changing the size of the paper to 16x9 inches (the default page size is \href{https://en.wikipedia.org/wiki/Paper_size}{A4}), making it perfect for presentations.
     \item \ff{nobrand}
           avoid mentioning the name of Nankai anywhere in the document, and removes the logo too.
-    \item \ff{nosecurity}
-          avoids mentioning the level of security at the top right corner of the document and also avoids showing the author's ID where it is usually visible.
+    \item \ff{nocover}
+          avoid printing the cover images on the first page by the \ff{\char`\\PrintFirstPage} command.
     \item \ff{nodate}
           do not show the date and time at the bottom of each page, where they usually are rendered in ISO~8601 format.
     \item \ff{nopaging}
           avoids page numbers at the bottom of each page.
-    \item \ff{authordraft}
-          prints a big ``It is a draft'' message across each page.
-    \item \ff{cn}
-          sets the language to simplified Chinese.
-    \item \ff{breaks}
-          forces all |\section| to start from a new page.
+    \item \ff{nosecurity}
+          avoids mentioning the level of security at the top right corner of the document and also avoids showing the author's ID where it is usually visible.
+    \item \ff{slides}
+          makes all headers larger, assuming the document is in landscape mode and presented as a slide deck.
 \end{itemize}
 
 \section{Preamble}

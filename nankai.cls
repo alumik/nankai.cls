@@ -29,17 +29,18 @@
 \RequirePackage{pgfopts}
 \pgfkeys{
     /nankai/.cd,
-    breaks/.store in=\nankai@breaks,
-    slides/.store in=\nankai@slides,
-    nosecurity/.store in=\nankai@nosecurity,
-    authordraft/.store in=\nankai@authordraft,
-    nobrand/.store in=\nankai@nobrand,
-    nodate/.store in=\nankai@nodate,
-    nocover/.store in=\nankai@nocover,
-    nopaging/.store in=\nankai@nopaging,
-    landscape/.store in=\nankai@landscape,
     anonymous/.store in=\nankai@anonymous,
+    authordraft/.store in=\nankai@authordraft,
+    boring/.store in=\nankai@boring,
+    breaks/.store in=\nankai@breaks,
     cn/.store in=\nankai@cn,
+    landscape/.store in=\nankai@landscape,
+    nobrand/.store in=\nankai@nobrand,
+    nocover/.store in=\nankai@nocover,
+    nodate/.store in=\nankai@nodate,
+    nopaging/.store in=\nankai@nopaging,
+    nosecurity/.store in=\nankai@nosecurity,
+    slides/.store in=\nankai@slides,
 }
 \ProcessPgfPackageOptions{/nankai}
 
