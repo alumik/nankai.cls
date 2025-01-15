@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2025/01/15 1.9.0 Template for Nankai Documents]
+\ProvidesClass{nankai}[2025/01/15 1.9.1 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -72,7 +72,7 @@
     \fi
 \else
     \ifdefined\nankai@boring
-        \geometry{a4paper, left=1.5in, right=1in, top=1.2in, bottom=1.8in}
+        \geometry{a4paper, left=1in, right=1in, top=1.2in, bottom=1.8in}
     \else
         \geometry{a4paper, left=1.5in, right=1in, top=1.2in, bottom=1.2in}
     \fi
