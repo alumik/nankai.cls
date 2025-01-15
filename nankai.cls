@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2024/08/27 1.8.0 Template for Nankai Documents]
+\ProvidesClass{nankai}[2025/01/15 1.9.0 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -44,31 +44,56 @@
 }
 \ProcessPgfPackageOptions{/nankai}
 
-\makeatletter\ifdefined\nankai@breaks
-    \let\nankai@oldsection\section
-    \renewcommand\section{\clearpage\nankai@oldsection}
-\fi\makeatother
+\ifdefined\nankai@boring
+    \RequirePackage[scaled]{helvet}
+    \renewcommand{\familydefault}{\sfdefault}
+\fi
+
+\RequirePackage{titlesec}
+\ifdefined\nankai@boring
+    \def\nankai@sectioncolor{NankaiPurple}
+\else
+    \def\nankai@sectioncolor{black}
+\fi
+\makeatletter
+\titleformat
+{\section}
+{\color{\nankai@sectioncolor}\ifdefined\nankai@breaks\clearpage\fi\normalfont\Large\bfseries}
+{\color{\nankai@sectioncolor}\thesection}{1em}{}
+\makeatother
 
 \RequirePackage{geometry}
-\makeatletter\ifdefined\nankai@landscape
-    \geometry{paperwidth=16in, paperheight=9in, left=4in, right=2in, top=1.5in, bottom=1.5in}
+\makeatletter
+\ifdefined\nankai@landscape
+    \ifdefined\nankai@boring
+        \geometry{paperwidth=16in, paperheight=9in, left=3in, right=2.5in, top=1in, bottom=1.8in}
+    \else
+        \geometry{paperwidth=16in, paperheight=9in, left=4in, right=2in, top=1.5in, bottom=1.5in}
+    \fi
 \else
-    \geometry{a4paper, left=1.5in, right=1in, top=1.2in, bottom=1.2in}
-\fi\makeatother
+    \ifdefined\nankai@boring
+        \geometry{a4paper, left=1.5in, right=1in, top=1.2in, bottom=1.8in}
+    \else
+        \geometry{a4paper, left=1.5in, right=1in, top=1.2in, bottom=1.2in}
+    \fi
+\fi
+\makeatother
 
-\makeatletter\ifdefined\nankai@slides
+\makeatletter
+\ifdefined\nankai@slides
     \usepackage[fontsize=24pt]{fontsize}
-\fi\makeatother
+\fi
+\makeatother
 
 \RequirePackage[T1]{fontenc}
-\PassOptionsToPackage{tt=false,type1=true}{libertine}
+\PassOptionsToPackage{tt=false, type1=true}{libertine}
 \RequirePackage{libertine}
 \RequirePackage[varqu]{zi4}
 \RequirePackage[libertine]{newtxmath}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{multicol}
 \RequirePackage{ragged2e}
-\PassOptionsToPackage{mmddyyyy,iso}{datetime}
+\PassOptionsToPackage{mmddyyyy, iso}{datetime}
 \RequirePackage{datetime}
 \newtimeformat{daytime}{\twodigit{\THEHOUR}:\twodigit{\THEMINUTE}}
 \PassOptionsToPackage{para}{footmisc}
@@ -77,34 +102,56 @@
 \setlength{\footnotesep}{2pt}
 \PassOptionsToPackage{hidelinks}{hyperref}
 \RequirePackage{hyperref}
-\RequirePackage[shortlabels,inline]{enumitem}
+\RequirePackage[shortlabels, inline]{enumitem}
 \setlist{nosep}
 \RequirePackage{lastpage}
 \RequirePackage{setspace}
 \setstretch{1.08}
-\RequirePackage[maxnames=1,minnames=1,natbib=true,citestyle=numeric,bibstyle=numeric,url=false,isbn=false,isbn=false]{biblatex}
+\RequirePackage[maxnames=1, minnames=1, natbib=true, citestyle=numeric, bibstyle=numeric, url=false, isbn=false, isbn=false]{biblatex}
 \PassOptionsToPackage{table}{xcolor}
 \RequirePackage{xcolor}
-\definecolor{red}{HTML}{CF0A2C}
-\definecolor{black}{HTML}{232527}
-\definecolor{gray}{HTML}{878C8F}
-\definecolor{yellow}{HTML}{F2DC5D}
-\definecolor{blue}{HTML}{2274A5}
-\definecolor{green}{HTML}{499167}
-\definecolor{orange}{HTML}{F06543}
+\makeatletter
+\ifdefined\nankai@boring
+    \definecolor{red}{HTML}{8C1A11}
+    \definecolor{black}{HTML}{000000}
+    \definecolor{gray}{HTML}{878C8F}
+    \definecolor{lightgray}{HTML}{DCDDDF}
+    \definecolor{yellow}{HTML}{F6C342}
+    \definecolor{blue}{HTML}{2B62BA}
+    \definecolor{green}{HTML}{499167}
+    \definecolor{orange}{HTML}{F7CEA1}
+\else
+    \definecolor{red}{HTML}{CF0A2C}
+    \definecolor{black}{HTML}{232527}
+    \definecolor{gray}{HTML}{878C8F}
+    \definecolor{yellow}{HTML}{F2DC5D}
+    \definecolor{blue}{HTML}{2274A5}
+    \definecolor{green}{HTML}{499167}
+    \definecolor{orange}{HTML}{F06543}
+\fi
+\makeatother
 \definecolor{NankaiPurple}{RGB}{113,26,95}
 \RequirePackage{tikz}
 \RequirePackage[skins,breakable]{tcolorbox}
 \RequirePackage[absolute]{textpos}
 \TPGrid{16}{16}
 \RequirePackage{booktabs}
-\PassOptionsToPackage{font={small,sf}}{caption}
+\PassOptionsToPackage{font={small, sf}}{caption}
 \RequirePackage{caption}
-\makeatletter\ifdefined\nankai@cn\RequirePackage{ctex}\else\RequirePackage[tt=false,type1=true]{libertine}\fi\makeatother%
+\makeatletter
+\ifdefined\nankai@cn
+    \RequirePackage{ctex}
+\else
+    \RequirePackage[tt=false, type1=true]{libertine}
+\fi
+\makeatother
 
-\makeatletter\g@addto@macro\@floatboxreset\centering\makeatother
+\makeatletter
+\g@addto@macro\@floatboxreset\centering%
+\makeatother
 
-\makeatletter\newcommand\nankai@header[1]{{%
+\makeatletter
+\newcommand\nankai@header[1]{{%
             \ifdefined\nankai@slides%
                 \setstretch{0.8}%
                 \fontsize{19pt}{24pt}\selectfont%
@@ -238,78 +285,117 @@
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 \fancyhf{}
-\makeatletter\fancyfoot[L]{
-    \nankai@bar
+\makeatletter
+\fancyfoot[L]{%
+    \nankai@bar%
     \ifdefined\nankai@authordraft%
         \begin{textblock}{14}[0.5,0.5](8,8)%
-            \tikz \node[minimum width=14\TPHorizModule] {%
+            \tikz\node[minimum width=14\TPHorizModule]{%
                 \fontsize{64}{64}\selectfont\sffamily\scshape\color{gray!20}\rotatebox{30}{\ifdefined\nankai@cn 草~~稿\else It is a draft\fi}
             };%
         \end{textblock}%
-    \else\fi%
-}\makeatother
-\makeatletter\fancyhead[L]{
-    \ifnum\value{page}=1\else%
-        \ifdefined\nankai@nobrand\else%
-            \begin{textblock}{8}[0,0](1.2,0.2)%
-                \nankai@logo{\ifdefined\nankai@slides 0.4\else 0.3\fi}%
-            \end{textblock}%
+    \else%
+    \fi%
+}
+\fancyhead[L]{%
+    \ifnum%
+        \value{page}=1%
+    \else%
+        \ifdefined\nankai@nobrand%
+        \else%
+            \ifdefined\nankai@boring%
+            \else%
+                \begin{textblock}{8}[0,0](1.2,0.2)%
+                    \nankai@logo{\ifdefined\nankai@slides 1.8\else 1\fi}%
+                \end{textblock}%
+            \fi%
         \fi%
     \fi%
-}\makeatother
-\makeatletter\fancyhead[R]{
-    \begin{textblock}{8}[1,0](15.8,0.2)%
-        \raggedleft\nankai@header{%
-            \ifdefined\nankai@nosecurity\else%
-                \thesecurity%
-            \fi%
-        }%
-    \end{textblock}%
-}\makeatother
-\makeatletter\fancyfoot[R]{
-    \begin{textblock}{8}[0,1](1.2,15.8)%
-        \ifnum\value{page}=1\else%
-        \nankai@header{\raggedright%
-            \ifdefined\nankai@anonymous\else%
-                \theauthor%
-                \ifdefined\nankai@nosecurity\else%
-                    \ifx\theid\empty\else, \theid\fi%
+}
+\fancyhead[R]{%
+    \ifdefined\nankai@boring%
+    \else%
+        \begin{textblock}{8}[1,0](15.8,0.2)%
+            \raggedleft\nankai@header{%
+                \ifdefined\nankai@nosecurity%
+                \else%
+                    \thesecurity%
                 \fi%
-                \ifdefined\nankai@nobrand\else%
-                    \newline
+            }%
+        \end{textblock}%
+    \fi%
+}
+\fancyfoot[R]{%
+    \ifdefined\nankai@boring%
+    \else%
+        \begin{textblock}{8}[0,1](1.2,15.8)%
+            \ifnum\value{page}=1%
+            \else%
+            \nankai@header{%
+                \raggedright%
+                \ifdefined\nankai@anonymous%
+                \else%
+                    \theauthor%
+                    \ifdefined\nankai@nosecurity%
+                    \else%
+                        \ifx\theid\empty\else, \theid\fi%
+                    \fi%
+                    \ifdefined\nankai@nobrand%
+                    \else%
+                        \newline%
+                    \fi%
                 \fi%
-            \fi%
-            \ifdefined\nankai@nobrand\else%
-                \thecompany{}%
-            \fi%
-        }%
-        \fi%
-    \end{textblock}%
-    \begin{textblock}{8}[1,1](15.8,15.8)%
-        \raggedleft\nankai@header{%
-            \ifnum\value{page}=1\else%
-            \ifdefined\nankai@nopaging\else%
-                \ifdefined\nankai@cn 第 \thepage{} 页, 共 \pageref*{LastPage} 页\else Page \#\thepage{} of \pageref*{LastPage}\fi%
-                \ifdefined\nankai@nodate\else%
-                    \\
+                \ifdefined\nankai@nobrand%
+                \else%
+                    \thecompany{}%
                 \fi%
+            }%
             \fi%
-            \fi%
-            \ifdefined\nankai@nodate\else%
-                \today{} \settimeformat{daytime}\currenttime{}%
-            \fi%
-        }%
-    \end{textblock}%
-}\makeatother
+        \end{textblock}%
+        \begin{textblock}{8}[1,1](15.8,15.8)%
+            \raggedleft\nankai@header{%
+                \ifnum\value{page}=1%
+                \else%
+                \ifdefined\nankai@nopaging%
+                \else%
+                    \ifdefined\nankai@cn%
+                        第 \thepage{} 页, 共 \pageref*{LastPage} 页%
+                    \else%
+                        Page \#\thepage{} of \pageref*{LastPage}%
+                    \fi%
+                    \ifdefined\nankai@nodate%
+                    \else%
+                        \\%
+                    \fi%
+                \fi%
+                \ifdefined\nankai@nodate%
+                \else%
+                    \today{} \settimeformat{daytime}\currenttime{}%
+                \fi%
+                \fi%
+            }%
+        \end{textblock}%
+    \fi%
+}
+\makeatother
 
 \RequirePackage{changepage}
-\renewenvironment{abstract}
-{\begin{adjustwidth}{0pt}{1in}{\scshape Abstract:}\newline\small}
-        {\end{adjustwidth}}
+\renewenvironment{abstract}{\begin{adjustwidth}{0pt}{1in}{\scshape Abstract:}\newline\small}{\end{adjustwidth}}
 
-\makeatletter\renewcommand\maketitle{%
+\makeatletter
+\renewcommand\maketitle{%
     \vspace*{18pt}%
-    {\bfseries{\begin{spacing}{.9}\Huge\raggedright\thetitle\par\end{spacing}}}%
+    {%
+        \bfseries{%
+            \begin{spacing}{.9}%
+                \Huge\raggedright%
+                \ifdefined\nankai@boring%
+                    \color{NankaiPurple}%
+                \fi%
+                \thetitle\par%
+            \end{spacing}%
+        }%
+    }%
     \ifx\thesubtitle\empty\else%
         {\color{gray!50!black}\large\raggedright\thesubtitle\par}%
     \fi%
@@ -412,7 +498,7 @@
     \newpage%
     \vspace*{1in}%
     \begin{center}%
-        \begin{minipage}{0.6\columnwidth}\raggedright%
+        \begin{minipage}{0.8\columnwidth}\raggedright%
             \normalsize%
             \setlength{\parskip}{6pt}%
             {\Huge\color{red}\textbf{Thank you!}}%
