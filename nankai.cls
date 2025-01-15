@@ -93,15 +93,7 @@
 \definecolor{orange}{HTML}{F06543}
 \definecolor{NankaiPurple}{RGB}{113,26,95}
 \RequirePackage{tikz}
-\RequirePackage{mdframed}
-\mdfdefinestyle{NankaiNote}{
-    topline=false,
-    bottomline=false,
-    rightline=false,
-    backgroundcolor=NankaiPurple!20,
-    linecolor=NankaiPurple,
-    linewidth=3pt
-}
+\RequirePackage[skins,breakable]{tcolorbox}
 \RequirePackage[absolute]{textpos}
 \TPGrid{16}{16}
 \RequirePackage{booktabs}
@@ -501,7 +493,19 @@
 \newcommand*\theid{}
 \newcommand\id[1]{\renewcommand\theid{#1}}
 
-\newenvironment{note}{\begin{mdframed}[style=NankaiNote]}{\end{mdframed}}
+\newenvironment{note}{%
+    \begin{tcolorbox}[
+            breakable,
+            enhanced jigsaw,
+            sharp corners,
+            colback=NankaiPurple!20,
+            colframe=NankaiPurple,
+            toprule=0pt,
+            rightrule=0pt,
+            bottomrule=0pt,
+            leftrule=3pt,
+        ]%
+        }{\end{tcolorbox}}
 
 \ifcsname nospell\endcsname\else\newcommand\nospell[1]{#1}\fi
 
