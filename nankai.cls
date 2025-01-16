@@ -22,7 +22,7 @@
 % SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nankai}[2025/01/15 1.9.1 Template for Nankai Documents]
+\ProvidesClass{nankai}[2025/01/16 1.9.2 Template for Nankai Documents]
 
 \LoadClass[12pt]{article}
 
@@ -486,7 +486,7 @@
     \maketitle%
     \ifdefined\nankai@nocover\else%
         \begin{textblock}{14}[1,1](14,14)%
-            \raggedleft\includegraphics[height=3.6in]{cover-picture.pdf}%
+            \raggedleft\includegraphics[height=3.6in]{front-image.pdf}%
         \end{textblock}%
     \fi%
 }\makeatother
