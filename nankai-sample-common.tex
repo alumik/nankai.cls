@@ -1,0 +1,86 @@
+\maketitle
+
+\begin{abstract}
+    This is a sample document for the \texttt{nankai} class.
+    It demonstrates how to use various features of the class.
+\end{abstract}
+
+\tableofcontents
+
+\clearpage
+
+\section{Paragraphs}
+
+\subsection{Normal Text}
+
+\lipsum[1-20]
+
+\subsection{Monospace Text}
+
+\texttt{Hello, world!}
+
+\subsection{List}
+
+Here is a list of items:
+
+\begin{itemize}
+    \item First item
+    \item Second item
+    \item Third item
+\end{itemize}
+
+\subsection{Numbered List}
+
+Here is a numbered list of items:
+
+\begin{enumerate}
+    \item First item
+    \item Second item
+    \item Third item
+\end{enumerate}
+
+\section{Document Components}
+
+\subsection{Footnotes}
+
+\lipsum[1]\footnote{This is a footnote.}
+
+\lipsum[2]\footnote{This is another footnote.}
+
+\subsection{Bibliography}
+
+\lipsum[3]~\cite{SCSF00045714}
+
+\section{Tables and Figures}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{example-image-a}
+    \caption{This is a figure.}
+    \label{fig:example}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+        \textbf{A} & \textbf{B} \\
+        \midrule
+        1          & 2          \\
+        \bottomrule
+    \end{tabular}
+    \caption{This is a table.}
+    \label{tab:example}
+\end{table}
+
+\section{Notes and Crumbs}
+
+\begin{note}
+    This is a note.
+\end{note}
+
+Here is a crumb:
+
+\PrintCrumb{Crumb Title}{Crumb content goes here.}
+
+\PrintBibliography

@@ -1,7 +1,7 @@
 # nankai.cls
 
 ![version-1.9.2](https://img.shields.io/badge/version-1.9.2-blue)
-![license-MIT](https://img.shields.io/badge/license-MIT-green)
+![license-MIT](https://img.shields.io/github/license/alumik/nankai.cls)
 
 This unofficial LaTeX package provides a class for creating documents for people working with Nankai University.
 
