@@ -21,7 +21,7 @@
 %<class>\ProvidesExplClass
 %<class>    {nankai}
 %<class>    {2025/05/16}
-%<class>    {v2.0.0}
+%<class>    {v2.1.0}
 %<class>    {Template for Nankai documents}
 %
 %<*driver>
@@ -82,7 +82,7 @@
 %     \textbf{\cls{nankai}: Template for Nankai Documents}^^A
 % }
 % \author{Zhenyu Zhong \\ \texttt{zyzhong@mail.nankai.edu.cn}}
-% \date{2025/05/16\qquad v2.0.0}
+% \date{2025/05/16\qquad v2.1.0}
 % \maketitle
 %
 % \begin{abstract}
@@ -606,6 +606,9 @@
 %    \end{macrocode}
 %
 % \begin{macro}{\@@_header:n}
+% 
+% Display the header of the page.
+% 
 %    \begin{macrocode}
 \cs_new:Nn \@@_header:n
     {
@@ -631,6 +634,11 @@
 % \end{macro}
 %
 % \begin{macro}{\@@_bar:}
+% 
+% \changes{v2.1}{2025/05/16}{Hide the page number in the first page.}
+% 
+% Add a bar at the bottom of the page in the boring mode, or add a colored bar at the left of the page in the normal mode.
+%
 %    \begin{macrocode}
 \cs_new:Nn \@@_bar:
     {
@@ -679,7 +687,12 @@
                                 { \tl_use:N \g_@@_institute_tl }
                         \end { textblock }
                     }
-                \bool_if:NF \c_@@_nopaging_bool
+                \bool_if:nF
+                    {
+                        \c_@@_nopaging_bool ||
+                        \int_compare_p:n
+                            { \c@page = 1 }
+                    }
                     {
                         \bool_if:NTF \c_@@_nonnankai_bool
                             {
