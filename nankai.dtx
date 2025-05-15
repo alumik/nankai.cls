@@ -834,6 +834,8 @@
     }
 %    \end{macrocode}
 % \end{macro}
+% 
+% \changes{v2.1}{2025/05/16}{Do not use small caps for Chinese text.}
 %
 % Then, we configure headers using \pkg{fancyhdr}.
 %
@@ -852,12 +854,11 @@
                     \fontsize { 64 } { 64 }
                     \selectfont
                     \sffamily
-                    \scshape
                     \color { gray!20 }
                     \rotatebox { 30 } {
                         \bool_if:NTF \c_@@_cn_bool
-                            { 草\quad 稿    }
-                            { It~is~a~draft }
+                            { 草\quad 稿             }
+                            { \scshape It~is~a~draft }
                     }
                 };
             \end { textblock }
