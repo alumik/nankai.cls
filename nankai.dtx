@@ -25,12 +25,9 @@
 %<class>    {Template for Nankai documents}
 %
 %<*driver>
-\PassOptionsToPackage{hyphens}{url}
 \RequirePackage[utf8]{inputenc}
 \documentclass{l3doc}
 \usepackage[scheme=plain,UTF8]{ctex}
-\usepackage{float}
-\usepackage{graphicx}
 \usepackage{hologo}
 \DefineVerbatimEnvironment{nankaiexam}{Verbatim}{
     gobble=6,
@@ -71,8 +68,7 @@
 %     \setlist, \setstretch, \sffamily, \small, \tcolorbox, \@author, \@title,
 %     \c@page, \textcolor, \textsc, \tikz, \titleformat, \thesection, \thepage,
 %     \tl_const:Nn, \tl_if_empty:eF, \tl_new:N, \tl_set:Nn, \tl_use:N, \topskip,
-%     \TPGrid, \TPHorizModule, \TPVertModule, \vspace, \int_compare_p:n,
-%
+%     \TPGrid, \TPHorizModule, \TPVertModule, \vspace, \int_compare_p:n, \zihao,
 % }
 %
 % \changes{v2.0}{2025/05/16}
@@ -297,74 +293,92 @@
 % First, we define and parse the class options.
 %
 % \begin{variable}{\c_@@_anonymous_bool}
+%
+% Whether to hide the author's name.
+%
 %    \begin{macrocode}
 \bool_new:N \c_@@_anonymous_bool
 %    \end{macrocode}
 % \end{variable}
 %
 % \begin{variable}{\c_@@_authordraft_bool}
+%
+% Whether to show a watermark ``This is a draft''.
+%
 %    \begin{macrocode}
 \bool_new:N \c_@@_authordraft_bool
 %    \end{macrocode}
 % \end{variable}
 %
 % \begin{variable}{\c_@@_boring_bool}
+%
+% Whether to use a ``boring'' style.
+%
 %    \begin{macrocode}
 \bool_new:N \c_@@_boring_bool
 %    \end{macrocode}
 % \end{variable}
 %
 % \begin{variable}{\c_@@_breaks_bool}
+%
+% Whether to break pages for each section.
+%
 %    \begin{macrocode}
 \bool_new:N \c_@@_breaks_bool
 %    \end{macrocode}
 % \end{variable}
 %
 % \begin{variable}{\c_@@_cn_bool}
+%
+% Whether to use Chinese.
+%
 %    \begin{macrocode}
 \bool_new:N \c_@@_cn_bool
 %    \end{macrocode}
 % \end{variable}
 %
 % \begin{variable}{\c_@@_nonnankai_bool}
+%
+% Whether to hide the Nankai logo.
+%
 %    \begin{macrocode}
 \bool_new:N \c_@@_nonnankai_bool
 %    \end{macrocode}
 % \end{variable}
 %
 % \begin{variable}{\c_@@_noinstitute_bool}
+%
+% Whether to hide the institute name.
+%
 %    \begin{macrocode}
 \bool_new:N \c_@@_noinstitute_bool
 %    \end{macrocode}
 % \end{variable}
 %
 % \begin{variable}{\c_@@_nodate_bool}
+%
+% Whether to hide the date.
+%
 %    \begin{macrocode}
 \bool_new:N \c_@@_nodate_bool
 %    \end{macrocode}
 % \end{variable}
 %
 % \begin{variable}{\c_@@_nopaging_bool}
+%
+% Whether to hide the page number.
+%
 %    \begin{macrocode}
 \bool_new:N \c_@@_nopaging_bool
 %    \end{macrocode}
 % \end{variable}
 %
 % \begin{variable}{\c_@@_slides_bool}
+%
+% Whether to use the slides mode.
+%
 %    \begin{macrocode}
 \bool_new:N \c_@@_slides_bool
-%    \end{macrocode}
-% \end{variable}
-%
-% \begin{variable}{\g_@@_institute_tl}
-%    \begin{macrocode}
-\tl_new:N \g_@@_institute_tl
-%    \end{macrocode}
-% \end{variable}
-%
-% \begin{variable}{\g_@@_subtitle_tl}
-%    \begin{macrocode}
-\tl_new:N \g_@@_subtitle_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -388,9 +402,9 @@
     nonnankai     .bool_set:N = \c_@@_nonnankai_bool,
     nonnankai     .default:n  = true,
     nonnankai     .initial:n  = false,
-    noinstitute .bool_set:N = \c_@@_noinstitute_bool,
-    noinstitute .default:n  = true,
-    noinstitute .initial:n  = false,
+    noinstitute   .bool_set:N = \c_@@_noinstitute_bool,
+    noinstitute   .default:n  = true,
+    noinstitute   .initial:n  = false,
     nodate        .bool_set:N = \c_@@_nodate_bool,
     nodate        .default:n  = true,
     nodate        .initial:n  = false,
@@ -409,10 +423,30 @@
 %    \begin{macrocode}
 \bool_if:NTF \c_@@_cn_bool
     { \LoadClass [ scheme = chinese, zihao = -4, UTF8 ] { ctexart } }
-    { \LoadClass [ scheme = plain  , zihao = -4, UTF8 ] { ctexart } }
+    { \LoadClass [ scheme = plain,   zihao = -4, UTF8 ] { ctexart } }
 %    \end{macrocode}
 %
-% Then, we define branded colors:
+% Then, we define some global variables.
+%
+% \begin{variable}{\g_@@_institute_tl}
+%
+% A variable that stores the name of the institution.
+%
+%    \begin{macrocode}
+\tl_new:N \g_@@_institute_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}{\g_@@_subtitle_tl}
+%
+% A variable that stores the subtitle of the document.
+%
+%    \begin{macrocode}
+\tl_new:N \g_@@_subtitle_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% Then, we define some theme colors:
 %
 %    \begin{macrocode}
 \RequirePackage [ table ] { xcolor }
@@ -440,6 +474,16 @@
     }
 %    \end{macrocode}
 %
+% Then, we include some useful packages.
+%    \begin{macrocode}
+\RequirePackage { graphicx }
+\RequirePackage { booktabs }
+\RequirePackage { tikz     }
+\RequirePackage { multicol }
+\RequirePackage [ showseconds = false, showzone = false ] { datetime2 }
+\RequirePackage [ skins, breakable ] { tcolorbox }
+%    \end{macrocode}
+%
 % Then, we redefine |\section| command in order to break pages for each section,
 % with the help of \pkg{titlesec} package.
 %
@@ -448,20 +492,18 @@
 %    \end{macrocode}
 %
 % \begin{variable}{\c_@@_sectioncolor_tl}
+%
+% A variable that stores the color of the section title.
+%
 %    \begin{macrocode}
 \bool_if:NTF \c_@@_boring_bool
-    {
-        \tl_const:Nn \c_@@_sectioncolor_tl { NankaiPurple }
-    }
-    {
-        \tl_const:Nn \c_@@_sectioncolor_tl { black }
-    }
+    { \tl_const:Nn \c_@@_sectioncolor_tl { NankaiPurple } }
+    { \tl_const:Nn \c_@@_sectioncolor_tl { black        } }
 %    \end{macrocode}
 %  \end{variable}
 %
 %    \begin{macrocode}
-\titleformat
-    { \section }
+\titleformat { \section }
     {
         \color { \tl_use:N \c_@@_sectioncolor_tl }
         \bool_if:NT \c_@@_breaks_bool { \clearpage }
@@ -477,7 +519,7 @@
     { }
 %    \end{macrocode}
 %
-% Then, we set the size of the page.
+% Then, we set the size of the page, with the help of \pkg{geometry} package.
 %
 %    \begin{macrocode}
 \RequirePackage { geometry }
@@ -501,7 +543,7 @@
                     left        = 2.5in,
                     right       = 1.5in,
                     top         = 1in,
-                    bottom      = 1in,
+                    bottom      = 1.2in,
                 }
             }
     }
@@ -535,19 +577,6 @@
     { \RequirePackage [ fontsize = 24pt ] { fontsize } }
 %    \end{macrocode}
 %
-% Then, we include some important packages.
-%    \begin{macrocode}
-\RequirePackage { graphicx }
-\RequirePackage { booktabs }
-\RequirePackage { tikz     }
-\RequirePackage { multicol }
-\RequirePackage [
-    showseconds = false,
-    showzone    = false,
-] { datetime2 }
-\RequirePackage [ skins, breakable ] { tcolorbox }
-%    \end{macrocode}
-%
 % Then, we include \pkg{lastpage} package to enable total counting of pages.
 %    \begin{macrocode}
 \RequirePackage { lastpage }
@@ -559,14 +588,14 @@
 \RequirePackage [ tt = false ] { libertine }
 %    \end{macrocode}
 %
-% Then, we configure \pkg{footmisc}.
+% Then, we configure footnotes, with the help of \pkg{footmisc} package.
 %    \begin{macrocode}
 \RequirePackage [ para ] { footmisc }
 \dim_set:Nn \footnotemargin { 2pt }
 \dim_set:Nn \footnotesep    { 2pt }
 %    \end{macrocode}
 %
-% Then, we configure \pkg{enumitem}.
+% Then, we configure lists, with the help of \pkg{enumitem} package.
 %    \begin{macrocode}
 \RequirePackage [ inline, shortlabels ] { enumitem }
 \setlist { nosep }
@@ -583,7 +612,7 @@
 \RequirePackage [ hidelinks ] { hyperref }
 %    \end{macrocode}
 %
-% Then, we configure |biblatex|:
+% Then, we configure \pkg{biblatex}:
 %    \begin{macrocode}
 \RequirePackage [
     backend = biber,
@@ -593,7 +622,7 @@
 ] { biblatex }
 %    \end{macrocode}
 %
-% Then, we make figure captions smaller and in |sf| font.
+% Then, we make figure captions smaller and in |sf| font, with the help of \pkg{caption} package.
 %
 %    \begin{macrocode}
 \RequirePackage [ font = { small, sf } ] { caption }
@@ -601,37 +630,24 @@
 %
 % \changes{v2.1}{2025/05/16}{Use larger line spacing for Chinese text.}
 %
-% Then, we set spacing between lines.
+% Then, we set spacing between lines, with the help of \pkg{setspace} package.
+%
 %    \begin{macrocode}
 \RequirePackage { setspace }
 \bool_if:NTF \c_@@_cn_bool
-    {
-        \setstretch { 1.3 }
-    }
-    {
-        \setstretch { 1.08 }
-    }
+    { \setstretch { 1.3  } }
+    { \setstretch { 1.08 } }
 %    \end{macrocode}
 %
-% \begin{macro}{\@@_header:n}
+% \begin{macro}{\@@_info:n}
 %
-% Display the header of the page.
+% Display pieces of document information, such as the page number and time.
 %
 %    \begin{macrocode}
-\cs_new:Nn \@@_header:n
+\cs_new:Nn \@@_info:n
     {
         \group_begin:
-        \bool_if:NTF \c_@@_slides_bool
-            {
-                \setstretch { 0.8 }
-                \fontsize { 19pt } { 24pt }
-                \selectfont
-            }
-            {
-                \setstretch { 0.8 }
-                \fontsize { 11pt } { 13pt }
-                \selectfont
-            }
+        \bool_if:NTF \c_@@_slides_bool { \zihao { 2 } } { \zihao { -4 } }
         \sffamily
         \color { gray }
         #1
@@ -641,9 +657,61 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\@@_vertical_bar:}
+%
+% A colored bar at the left of the page in the normal mode.
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_vertical_bar:
+    {
+        \begin { textblock } { 1 } [ 0, 0 ] ( 0, 0 )
+            \tikz
+            \node [
+                fill           = NankaiPurple,
+                minimum~width  = \TPHorizModule,
+                minimum~height = 16 \TPVertModule,
+            ] { };
+        \end { textblock }
+    }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_horizontal_bar:}
+%
+% A gray bar at the bottom of the page in the boring mode.
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_horizontal_bar:
+    {
+        \begin { textblock } { 16 } [ 0, 1 ] ( 0, 16 )
+            \tikz
+            \node [
+                fill           = lightgray,
+                minimum~width  = 16 \TPHorizModule,
+                minimum~height = 1.5 \TPVertModule,
+            ] { };
+        \end { textblock }
+        \bool_if:NT \c_@@_slides_bool
+            {
+                \begin { textblock } { 2 } [ 1, 0.5 ] ( 14, 15.25 )
+                    \tikz
+                    \path [
+                        scale  = 0.3,
+                        draw   = none,
+                        rotate = 40,
+                        fill   = white,
+                    ] (0,0) .. controls (3,1) .. (16,0) -- (16,3) ..
+                        controls (8, 2) .. (0, 3) -- (0,0);
+                \end { textblock }
+            }
+    }
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\@@_bar:}
 %
 % \changes{v2.1}{2025/05/16}{Hide the page number in the first page.}
+% \changes{v2.1}{2025/05/16}{Logical separation of bar patterns from headers and footers.}
 %
 % Add a bar at the bottom of the page in the boring mode, or add a colored bar at the left of the page in the normal mode.
 %
@@ -651,115 +719,8 @@
 \cs_new:Nn \@@_bar:
     {
         \bool_if:NTF \c_@@_boring_bool
-            {
-                \begin { textblock } { 16 } [ 0, 1 ] ( 0, 16 )
-                    \tikz
-                    \node [
-                        fill           = lightgray,
-                        minimum~width  = 16 \TPHorizModule,
-                        minimum~height = 1.5 \TPVertModule,
-                    ] { };
-                \end { textblock }
-                \bool_if:NF \c_@@_nonnankai_bool
-                    {
-                        \bool_if:NTF \c_@@_slides_bool
-                            {
-                                \begin { textblock }
-                                    { 3 }
-                                    [ 1, 0.5 ]
-                                    ( 15.5, 15.25 )
-                                    \raggedleft
-                                    \@@_logo:n { 1.4 }
-                                \end { textblock }
-                            }
-                            {
-                                \begin { textblock }
-                                    { 3 }
-                                    [ 1, 0.5 ]
-                                    ( 15, 15.25 )
-                                    \raggedleft
-                                    \@@_logo:n { 1 }
-                                \end { textblock }
-                            }
-                    }
-                \bool_if:NF \c_@@_noinstitute_bool
-                    {
-                        \begin { textblock } { 8 } [ 0, 0.5 ] ( 1, 15.25 )
-                            \bool_if:NT \c_@@_slides_bool
-                                {
-                                    \fontsize { 16 } { 16 }
-                                    \selectfont
-                                }
-                            \textcolor
-                                { gray }
-                                { \tl_use:N \g_@@_institute_tl }
-                        \end { textblock }
-                    }
-                \bool_if:nF
-                    {
-                        \c_@@_nopaging_bool ||
-                        \int_compare_p:n
-                            { \c@page = 1 }
-                    }
-                    {
-                        \bool_if:NTF \c_@@_nonnankai_bool
-                            {
-                                \begin { textblock }
-                                    { 7 }
-                                    [ 1, 0.5 ]
-                                    ( 15, 15.25 )
-                            }
-                            {
-                                \begin { textblock }
-                                    { 4 }
-                                    [ 1, 0.5 ]
-                                    ( 12, 15.25 )
-                            }
-                            \raggedleft
-                            \bool_if:NT \c_@@_slides_bool
-                                {
-                                    \fontsize { 16 } { 16 }
-                                    \selectfont
-                                }
-                            \textcolor
-                                { gray }
-                                {
-                                    \bool_if:NTF \c_@@_cn_bool
-                                        {
-                                            第~\thepage{}~页
-                                            （共~\pageref*{LastPage}~页）
-                                        }
-                                        {
-                                            Page~\#\thepage{}~of~
-                                            \pageref*{LastPage}
-                                        }
-                                }
-                        \end { textblock }
-                    }
-                \bool_if:NT \c_@@_slides_bool
-                    {
-                        \begin { textblock } { 2 } [ 1, 0.5 ] ( 14, 15.25 )
-                            \tikz
-                            \path [
-                                scale  = 0.3,
-                                draw   = none,
-                                rotate = 40,
-                                fill   = white,
-                            ] (0,0) .. controls (3,1) .. (16,0) -- (16,3) ..
-                                controls (8, 2) .. (0, 3) -- (0,0);
-                        \end { textblock }
-                    }
-            }
-            {
-                \begin { textblock } { 1 } [ 0, 0 ] ( 0, 0 )
-                    \tikz
-                    \node [
-                        fill           = NankaiPurple,
-                        minimum~width  = \TPHorizModule,
-                        minimum~height = 16 \TPVertModule,
-                    ] { };
-                \end { textblock }
-            }
+            { \@@_horizontal_bar: }
+            { \@@_vertical_bar:   }
     }
 %    \end{macrocode}
 % \end{macro}
@@ -843,15 +804,35 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \changes{v2.1}{2025/05/16}{Do not use small caps for Chinese text.}
+% \begin{macro}{\@@_page:}
 %
-% Then, we configure headers using \pkg{fancyhdr}.
+% Display the page number and the total number of pages.
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_page:
+    {
+        \bool_if:NTF \c_@@_cn_bool
+            { 第~\thepage{}~页（共~\pageref*{LastPage}~页） }
+            { Page~\#\thepage{}~of~\pageref*{LastPage}      }
+    }
+%    \end{macrocode}
+% \end{macro}
+%
+% \changes{v2.1}{2025/05/16}{Do not use small caps for Chinese text.}
+% \changes{v2.1}{2025/05/16}{Change ``It'' in the draft watermark to ``This''.}
+%
+% Then, we configure headers and footers using \pkg{fancyhdr}.
 %
 %    \begin{macrocode}
 \RequirePackage { fancyhdr }
 \pagestyle { fancy }
 \RenewExpandableDocumentCommand \headrulewidth { } { 0pt }
 \fancyhf { }
+%    \end{macrocode}
+%
+% Add bar and draft watermarks.
+%
+%    \begin{macrocode}
 \fancyfoot [ L ] {
     \@@_bar:
     \bool_if:NT \c_@@_authordraft_bool
@@ -865,13 +846,18 @@
                     \color { gray!20 }
                     \rotatebox { 30 } {
                         \bool_if:NTF \c_@@_cn_bool
-                            { 草\quad 稿             }
-                            { \scshape It~is~a~draft }
+                            { 草\quad 稿               }
+                            { \scshape This~is~a~draft }
                     }
                 };
             \end { textblock }
         }
 }
+%    \end{macrocode}
+%
+% Add Nankai logo.
+%
+%    \begin{macrocode}
 \fancyhead [ L ] {
     \int_compare:nT { \c@page != 1 }
         {
@@ -880,21 +866,75 @@
                 {
                     \begin { textblock } { 8 } [ 0, 0 ] ( 1.2, 0.2 )
                         \@@_logo:n {
-                            \bool_if:NTF \c_@@_slides_bool
-                                { 1.8 }
-                                { 1 }
+                            \bool_if:NTF \c_@@_slides_bool { 1.8 } { 1 }
                         }
                     \end { textblock }
                 }
         }
 }
+%    \end{macrocode}
+%
+% Add document information.
+%
+%    \begin{macrocode}
 \fancyfoot [ R ] {
-    \bool_if:NF \c_@@_boring_bool
+    \bool_if:NTF \c_@@_boring_bool
+        {
+            \bool_if:NF \c_@@_nonnankai_bool
+                {
+                    \bool_if:NTF \c_@@_slides_bool
+                        {
+                            \begin { textblock }
+                                { 3 }
+                                [ 1, 0.5 ]
+                                ( 15.5, 15.25 )
+                                \raggedleft
+                                \@@_logo:n { 1.4 }
+                            \end { textblock }
+                        }
+                        {
+                            \begin { textblock }
+                                { 3 }
+                                [ 1, 0.5 ]
+                                ( 15, 15.25 )
+                                \raggedleft
+                                \@@_logo:n { 1 }
+                            \end { textblock }
+                        }
+                }
+            \bool_if:NF \c_@@_noinstitute_bool
+                {
+                    \begin { textblock }{ 8 } [ 0, 0.5 ] ( 1, 15.25 )
+                        \@@_info:n {
+                            \raggedright
+                            \tl_use:N \g_@@_institute_tl
+                        }
+                    \end { textblock }
+                }
+            \bool_if:nF
+                {
+                    \c_@@_nopaging_bool ||
+                    \int_compare_p:n { \c@page = 1 }
+                }
+                {
+                    \bool_if:NTF \c_@@_nonnankai_bool
+                        {
+                            \begin { textblock } { 7 } [ 1, 0.5 ]
+                                ( 15, 15.25 )
+                        }
+                        {
+                            \begin { textblock } { 4 } [ 1, 0.5 ]
+                                ( 12, 15.25 )
+                        }
+                        \@@_info:n { \raggedleft \@@_page: }
+                    \end { textblock }
+                }
+        }
         {
             \begin { textblock } { 8 } [ 0, 1 ] ( 1.2, 15.8 )
                 \int_compare:nT { \c@page != 1 }
                     {
-                        \@@_header:n {
+                        \@@_info:n {
                             \raggedright
                             \bool_if:NF \c_@@_anonymous_bool
                                 {
@@ -911,29 +951,20 @@
                     }
             \end { textblock }
             \begin { textblock } { 8 } [ 1, 1 ] ( 15.8, 15.8 )
-                \@@_header:n {
+                \@@_info:n {
                     \raggedleft
                     \int_compare:nT { \c@page != 1 }
                         {
                             \bool_if:NF \c_@@_nopaging_bool
                             {
-                                \bool_if:NTF \c_@@_cn_bool
-                                    {
-                                        第~\thepage{}~页
-                                        （共~\pageref*{LastPage}~页）
-                                    }
-                                    {
-                                        Page~\#\thepage{}~of~
-                                        \pageref*{LastPage}
-                                    }
+                                \@@_page:
                                 \bool_if:NF \c_@@_nodate_bool
                                     {
                                         \\
                                     }
                               }
                         }
-                    \bool_if:NF \c_@@_nodate_bool
-                        { \DTMnow }
+                    \bool_if:NF \c_@@_nodate_bool { \DTMnow }
                 }
             \end { textblock }
         }
