@@ -20,8 +20,8 @@
 %<class>\RequirePackage{expl3}
 %<class>\ProvidesExplClass
 %<class>    {nankai}
-%<class>    {2025/05/16}
-%<class>    {v2.1.1}
+%<class>    {2025/09/02}
+%<class>    {v2.1.2}
 %<class>    {Template for Nankai documents}
 %
 %<*driver>
@@ -78,7 +78,7 @@
 %     \textbf{\cls{nankai}: Template for Nankai Documents}^^A
 % }
 % \author{Zhenyu Zhong \\ \texttt{zyzhong@mail.nankai.edu.cn}}
-% \date{2025/05/16\qquad v2.1.1}
+% \date{2025/09/02\qquad v2.1.2}
 % \maketitle
 %
 % \begin{abstract}
@@ -481,7 +481,14 @@
 \RequirePackage { tikz     }
 \RequirePackage { multicol }
 \RequirePackage [ showseconds = false, showzone = false ] { datetime2 }
-\RequirePackage [ skins, breakable ] { tcolorbox }
+%    \end{macrocode}
+%
+% \changes{v2.1.2}{2025/09/02}{Update package options of \pkg{tcolorbox} to use the most features.}
+%
+% Tells tcolorbox to load a large collection of its commonly used libraries.
+%
+%    \begin{macrocode}
+\RequirePackage [ most ] { tcolorbox }
 %    \end{macrocode}
 %
 % Then, we redefine |\section| command in order to break pages for each section,
