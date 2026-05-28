@@ -25,7 +25,7 @@ Disclaimer: This is **NOT** a product of Nankai University. This package is crea
     - Method 2: Use the following command to extract `nankai.cls` from `nankai.dtx`.
 
       ```
-      xelatex nankai.ins
+      l3build unpack
       ```
 
 3. Use pdfLaTeX/XeLaTeX/LuaLaTeX to compile the your `*.tex` file.
@@ -43,7 +43,7 @@ If you want to build an instructional document for this template, you can refer 
 2. Execute in the template folder
 
     ```
-    latexmk nankai.dtx
+    l3build doc
     ```
 
     You can generate the `nankai.pdf` file, which is the template description document in the directory.
